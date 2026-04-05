@@ -1,0 +1,32 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Circle -->
+  <circle cx="100" cy="100" r="80" fill="url(#gradient1)" stroke="#8b5cf6" stroke-width="4"/>
+  
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Bar Chart -->
+  <rect x="55" y="95" width="12" height="25" rx="2" fill="url(#gradient2)"/>
+  <rect x="72" y="85" width="12" height="35" rx="2" fill="url(#gradient2)"/>
+  <rect x="89" y="75" width="12" height="45" rx="2" fill="url(#gradient2)"/>
+  <rect x="106" y="65" width="12" height="55" rx="2" fill="url(#gradient2)"/>
+  
+  <!-- Rupee Symbol -->
+  <text x="120" y="110" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#e9d5ff">₹</text>
+  
+  <!-- Trend Arrow -->
+  <path d="M 60 90 L 130 50" stroke="#a78bfa" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 130 50 L 145 45 L 135 60 Z" fill="#a78bfa"/>
+  
+  <!-- Divider Line -->
+  <line x1="100" y1="50" x2="100" y2="120" stroke="#1e1b4b" stroke-width="3"/>
+</svg>
