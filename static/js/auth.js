@@ -2,7 +2,10 @@
  * Authentication Service
  */
 
-const API_URL = 'http://localhost:5001/api';
+// Dynamic API URL based on environment
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5001/api'
+    : 'https://expenseanalyzerbackend-q50r.onrender.com/api'; // Update with your backend URL
 
 class AuthService {
     constructor() {

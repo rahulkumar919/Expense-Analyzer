@@ -174,23 +174,51 @@ function setupEventListeners() {
     });
 
     DOM.inputs.planTravelBtn.addEventListener('click', async () => {
-        const destination = DOM.inputs.travelDestination.value;
-        const days = DOM.inputs.travelDays.value;
-        if (!destination) return;
+        const destination = DOM.inputs.travelDestination.value.trim();
+        const days = parseInt(DOM.inputs.travelDays.value);
         
-        const res = await fetch(`${API_BASE}/travel`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ destination, days })
-        });
-        const data = await res.json();
+        if (!destination) {
+            showToast('Please enter a destination', 'error');
+            return;
+        }
         
-        DOM.inputs.travelTitle.textContent = `Estimated Budget for ${data.destination} (${data.days} days)`;
-        DOM.inputs.travelTransport.textContent = `₹${data.transport}`;
-        DOM.inputs.travelFood.textContent = `₹${data.food}`;
-        DOM.inputs.travelStay.textContent = `₹${data.stay}`;
-        DOM.inputs.travelTotal.textContent = `₹${data.total}`;
-        DOM.inputs.travelResult.style.display = 'block';
+        if (!days || days < 1) {
+            showToast('Please enter valid number of days', 'error');
+            return;
+        }
+        
+        if (days > 30) {
+            showToast('Please enter a realistic trip duration (max 30 days)', 'error');
+            return;
+        }
+        
+        try {
+            const res = await fetch(`${API_BASE}/travel`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ destination, days })
+            });
+            
+            if (!res.ok) {
+                const error = await res.json();
+                showToast(error.error || 'Failed to calculate travel budget', 'error');
+                return;
+            }
+            
+            const data = await res.json();
+            
+            DOM.inputs.travelTitle.textContent = `Estimated Budget for ${data.destination.toUpperCase()} (${data.days} ${data.days === 1 ? 'day' : 'days'})`;
+            DOM.inputs.travelTransport.textContent = `₹${data.transport.toLocaleString('en-IN')}`;
+            DOM.inputs.travelFood.textContent = `₹${data.food.toLocaleString('en-IN')}`;
+            DOM.inputs.travelStay.textContent = `₹${data.stay.toLocaleString('en-IN')}`;
+            DOM.inputs.travelTotal.textContent = `₹${data.total.toLocaleString('en-IN')}`;
+            DOM.inputs.travelResult.style.display = 'block';
+            
+            showToast('Travel budget calculated successfully', 'success');
+        } catch (error) {
+            showToast('Network error. Please try again.', 'error');
+            console.error('Travel planning error:', error);
+        }
     });
 }
 

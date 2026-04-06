@@ -1,4 +1,4 @@
-# ExpenseSense Pro - Frontend
+# ExpenseAnalyzer Pro - Frontend
 
 ## 🚀 Quick Start
 
