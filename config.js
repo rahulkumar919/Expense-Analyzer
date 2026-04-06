@@ -2,13 +2,11 @@
 // API Configuration
 // ============================================
 
-// IMPORTANT: Production me apna backend URL yahan dalo!
 const API_CONFIG = {
-    // Development (Local testing)
-    BASE_URL: 'http://localhost:5001/api',
-    
-    // Production (Render backend URL yahan dalo)
-    // BASE_URL: 'https://your-backend-app.onrender.com/api',
+    // Auto-detect environment
+    BASE_URL: (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'http://localhost:5001/api'
+        : 'https://expenseanalyzerbackend-q50r.onrender.com/api',
     
     // API Endpoints
     ENDPOINTS: {
